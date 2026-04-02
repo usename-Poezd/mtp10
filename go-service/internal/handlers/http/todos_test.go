@@ -1,4 +1,4 @@
-package handlers
+package handler
 
 import (
 	"bytes"
@@ -17,13 +17,7 @@ func setupRouter() *gin.Engine {
 	s := store.NewStore()
 	h := NewHandler(s)
 	r := gin.New()
-
-	r.GET("/todos", h.GetTodos)
-	r.POST("/todos", h.CreateTodo)
-	r.GET("/todos/:id", h.GetTodoByID)
-	r.PUT("/todos/:id", h.UpdateTodo)
-	r.DELETE("/todos/:id", h.DeleteTodo)
-
+	h.Init(r)
 	return r
 }
 
@@ -55,7 +49,7 @@ func TestCreateAndGetTodo(t *testing.T) {
 		t.Fatalf("expected status %d, got %d", http.StatusCreated, createW.Code)
 	}
 
-	var created map[string]interface{}
+	var created map[string]any
 	if err := json.Unmarshal(createW.Body.Bytes(), &created); err != nil {
 		t.Fatalf("failed to parse response: %v", err)
 	}
@@ -96,7 +90,7 @@ func TestUpdateAndDeleteTodo(t *testing.T) {
 	createW := httptest.NewRecorder()
 	r.ServeHTTP(createW, createReq)
 
-	var created map[string]interface{}
+	var created map[string]any
 	if err := json.Unmarshal(createW.Body.Bytes(), &created); err != nil {
 		t.Fatalf("failed to parse create response: %v", err)
 	}
