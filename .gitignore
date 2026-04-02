@@ -1,19 +1,33 @@
 # Python
 python-service/venv/
-__pycache__/
+**/__pycache__/
 *.pyc
 *.pyo
+*.pyd
 .pytest_cache/
+.ruff_cache/
+**/.ruff_cache/
 
-# Go
+# Go binaries
 go-service/bin/
 go-service/server
+go-service/gateway
+go-service/ws-server
 *.exe
 
 # IDE
 .idea/
 .vscode/
 *.swp
+*.swo
 
-# Sisyphus
+# OS
+.DS_Store
+Thumbs.db
+
+# Lab assignment files (not project code)
+lab10_variant2.md
+reqs.md
+
+# Sisyphus (internal planning)
 .sisyphus/

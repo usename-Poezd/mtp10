@@ -7,6 +7,21 @@
 
 ## Вариант 2
 
+### Задания средней сложности
+
+| # | Задание | Реализация |
+|---|---------|-----------|
+| М2 | Добавить middleware для логирования в Go | `go-service/internal/middleware/logger.go` — структурированный key=value лог |
+| М4 | Создать FastAPI-сервис, который вызывает Go-сервис через HTTP | `python-service/app/` — прокси с Pydantic-валидацией и `/stats` |
+| М6 | Сравнить скорость ответа FastAPI и Gin под нагрузкой (wrk) | `bench/run_benchmark.sh`, `BENCHMARK.md` |
+
+### Задания повышенной сложности
+
+| # | Задание | Реализация |
+|---|---------|-----------|
+| В2 | Создать API-шлюз на Go, маршрутизирующий запросы к микросервисам | `go-service/internal/gateway/` — `/api/go/*` и `/api/python/*` |
+| В4 | WebSocket: чат на Go + подключение из Python | `go-service/internal/ws/` (Hub) + `python-service/ws_client.py` |
+
 ---
 
 ## Описание
