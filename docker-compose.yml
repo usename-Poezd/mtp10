@@ -27,3 +27,18 @@ services:
       interval: 5s
       timeout: 3s
       retries: 5
+
+  gateway:
+    build:
+      context: ./go-service
+      dockerfile: Dockerfile.gateway
+    ports:
+      - "9000:9000"
+    environment:
+      - GO_BACKEND_URL=http://go-service:8080
+      - PYTHON_BACKEND_URL=http://python-service:8000
+    depends_on:
+      go-service:
+        condition: service_healthy
+      python-service:
+        condition: service_healthy
