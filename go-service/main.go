@@ -9,7 +9,8 @@ import (
 )
 
 func main() {
-	r := gin.Default()
+	r := gin.New()
+	r.Use(gin.Recovery())
 	r.Use(middleware.Logger())
 
 	s := store.NewStore()
