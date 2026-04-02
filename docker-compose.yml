@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  go-service:
+    build:
+      context: ./go-service
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/todos"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  python-service:
+    build:
+      context: ./python-service
+    ports:
+      - "8000:8000"
+    environment:
+      - GO_SERVICE_URL=http://go-service:8080
+    depends_on:
+      go-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/todos')"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
