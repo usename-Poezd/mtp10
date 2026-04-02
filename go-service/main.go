@@ -4,11 +4,13 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"go-service/handlers"
+	"go-service/middleware"
 	"go-service/store"
 )
 
 func main() {
 	r := gin.Default()
+	r.Use(middleware.Logger())
 
 	s := store.NewStore()
 	h := handlers.NewHandler(s)
