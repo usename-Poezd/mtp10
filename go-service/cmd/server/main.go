@@ -3,9 +3,9 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 
-	"go-service/handlers"
-	"go-service/middleware"
-	"go-service/store"
+	"go-service/internal/handlers"
+	"go-service/internal/middleware"
+	"go-service/internal/store"
 )
 
 func main() {

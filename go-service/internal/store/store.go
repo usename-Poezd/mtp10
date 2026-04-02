@@ -3,7 +3,7 @@ package store
 import (
 	"sync"
 
-	"go-service/models"
+	"go-service/internal/models"
 
 	"github.com/google/uuid"
 )

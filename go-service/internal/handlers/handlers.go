@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"go-service/store"
+	"go-service/internal/store"
 )
 
 type Handler struct {
