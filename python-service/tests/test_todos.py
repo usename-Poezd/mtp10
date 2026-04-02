@@ -78,3 +78,11 @@ def test_delete_todo():
         mock.delete("/todos/abc-123").mock(return_value=httpx.Response(204))
         response = client.delete("/todos/abc-123")
     assert response.status_code == 204
+
+
+def test_go_service_unavailable():
+    with respx.mock(base_url=GO_URL) as mock:
+        mock.get("/todos").mock(side_effect=httpx.ConnectError("connection refused"))
+        response = client.get("/todos")
+    assert response.status_code == 503
+    assert "unavailable" in response.json()["detail"].lower()
